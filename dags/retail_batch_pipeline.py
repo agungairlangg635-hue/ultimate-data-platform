@@ -12,11 +12,11 @@ default_args = {
 
 
 COMMON_ENV = """
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=retail_warehouse
-POSTGRES_USER=platform_user
-POSTGRES_PASSWORD=platform_password
+export POSTGRES_HOST=postgres
+export POSTGRES_PORT=5432
+export POSTGRES_DB=retail_warehouse
+export POSTGRES_USER=platform_user
+export POSTGRES_PASSWORD=platform_password
 """
 
 
@@ -48,4 +48,13 @@ with DAG(
         """,
     )
 
-    generate_retail_data >> run_quality_checks
+    run_transformations = BashOperator(
+        task_id="run_transformations",
+        bash_command=f"""
+        pip install psycopg2-binary &&
+        {COMMON_ENV}
+        python /opt/airflow/data_generator/transform_analytics.py
+        """,
+    )
+
+    generate_retail_data >> run_quality_checks >> run_transformations

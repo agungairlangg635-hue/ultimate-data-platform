@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Docker",
+      "type": "shell",
+      "command": "docker compose up -d",
+      "group": "build"
+    },
+    {
+      "label": "Stop Docker",
+      "type": "shell",
+      "command": "docker compose down"
+    },
+    {
+      "label": "Run Data Generator",
+      "type": "shell",
+      "command": "python scripts/generate_data.py"
+    }
+  ]
+}
