@@ -1,12 +1,27 @@
-.env
+# Python
 __pycache__/
 *.pyc
+
+# Virtual env
 .venv/
-venv/
-logs/*
-!logs/.gitkeep
-data/
-tmp/
-.airflow/
-*.db
+env/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Airflow logs
+airflow/logs/
+
+# OS
 .DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Temp
+*.tmp
