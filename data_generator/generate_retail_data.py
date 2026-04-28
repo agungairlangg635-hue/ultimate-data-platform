@@ -8,14 +8,14 @@ from faker import Faker
 
 fake = Faker("id_ID")
 
+import os
 DB_CONFIG = {
-    "host": "localhost",
-    "port": 5433,
-    "database": "retail_warehouse",
-    "user": "platform_user",
-    "password": "platform_password",
+    "host": os.getenv("POSTGRES_HOST", "localhost"),
+    "port": int(os.getenv("POSTGRES_PORT", "5433")),
+    "database": os.getenv("POSTGRES_DB", "retail_warehouse"),
+    "user": os.getenv("POSTGRES_USER", "platform_user"),
+    "password": os.getenv("POSTGRES_PASSWORD", "platform_password"),
 }
-
 
 PRODUCTS = [
     ("Laptop Pro 14", "Electronics", 18500000),
